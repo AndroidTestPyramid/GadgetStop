@@ -8,6 +8,7 @@ android {
         applicationId "droidcon.gadgetstop"
         minSdkVersion 21
         targetSdkVersion 22
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -16,13 +17,27 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+    testOptions{
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
     compile 'com.android.support:support-v4:22.2.1'
     compile 'com.android.support:design:22.2.1'
     compile 'com.github.satyan:sugar:1.3.1'
-    compile 'com.google.code.gson:gson:2.3.1'
+    compile 'com.google.code.gson:gson:2.4'
+    testCompile 'org.apache.commons:commons-io:1.3.2'
     testCompile 'junit:junit:4.4'
     testCompile 'org.mockito:mockito-core:1.10.19'
+    androidTestCompile('com.android.support.test:runner:0.4.1'){
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.1'){
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestCompile('com.android.support.test.espresso:espresso-intents:2.2.1') {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestCompile 'com.squareup.okhttp:mockwebserver:2.4.0'
 }

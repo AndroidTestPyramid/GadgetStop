@@ -13,85 +13,68 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
-import com.google.gson.reflect.TypeToken;
-
-import java.io.InputStream;
-import java.util.ArrayList;
+import java.util.List;
 
 import droidcon.gadgetstop.R;
-import droidcon.gadgetstop.service.APIClient;
-import droidcon.gadgetstop.service.APIClient.RequestType;
-import droidcon.gadgetstop.service.ResponseCallback;
-import droidcon.gadgetstop.service.ResponseDeserializer;
-import droidcon.gadgetstop.service.ResponseDeserializerFactory;
 import droidcon.gadgetstop.shopping.model.Product;
+import droidcon.gadgetstop.shopping.viewmodel.ProductViewModel;
 
-public abstract class ProductsBaseFragment extends Fragment {
+public abstract class ProductsBaseFragment extends Fragment implements ProductListView {
 
   public static final String PRODUCT_KEY = "droidcon.gadgetstop.cart.current_product";
   private ProgressDialog progressDialog;
   private GridView gridView;
 
   @Override
-  public void onCreate(Bundle savedInstanceState) {
+  public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     fetchProducts();
   }
+
+  abstract public void fetchProducts();
 
   @Nullable
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.products_layout, container, false);
-    progressDialog = ProgressDialog.show(getActivity(), "", getString(R.string.loading), true, false);
+    progressDialog = new ProgressDialog(this.getActivity());
+    progressDialog.setMessage("Loading...");
+    progressDialog.setCancelable(false);
+    progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+    progressDialog.show();
     gridView = (GridView) view.findViewById(R.id.grid_view);
     return view;
   }
 
-  private void fetchProducts() {
-    new APIClient().execute(RequestType.GET, getURL(), productsCallback());
-  }
+  @Override
+  public void render(List<Product> products, final List<ProductViewModel> productViewModels) {
+    final ShoppingItemsAdapter shoppingItemsAdapter = new ShoppingItemsAdapter(productViewModels, products, getActivity());
+    gridView.setAdapter(shoppingItemsAdapter);
 
-  abstract public String getURL();
-
-  private ResponseCallback<ArrayList<Product>> productsCallback() {
-    return new ResponseCallback<ArrayList<Product>>() {
-      @Override
-      public ArrayList<Product> deserialize(InputStream response) {
-        final TypeToken<ArrayList<Product>> typeToken = new TypeToken<ArrayList<Product>>() {
-        };
-        ResponseDeserializer<ArrayList<Product>> objectResponseDeserializer = ResponseDeserializerFactory.objectDeserializer(typeToken.getType());
-        return objectResponseDeserializer.deserialize(response);
-      }
-
-      @Override
-      public void onSuccess(ArrayList<Product> response) {
-        progressDialog.dismiss();
-        renderProducts(gridView, response);
-      }
-
-      @Override
-      public void onError(Exception exception) {
-        progressDialog.dismiss();
-        new AlertDialog.Builder(getActivity()).setMessage(R.string.technical_difficulty).setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-          @Override
-          public void onClick(DialogInterface dialogInterface, int i) {
-            getActivity().finish();
-          }
-        });
-      }
-    };
-  }
-
-  private void renderProducts(GridView gridView, final ArrayList<Product> products) {
-    gridView.setAdapter(new ShoppingItemsListAdapter(products));
-
+    //TODO: Even if I pass productViewModels, getItem will give productViewModel only...cannot avoid passing view model
     gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
       @Override
       public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-        Product product = (Product) adapterView.getAdapter().getItem(position);
-        Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
+        Product product = shoppingItemsAdapter.getProductAt(position);
+        Intent intent = new Intent(getActivity(), ProductDetailActivity.class);
         intent.putExtra(PRODUCT_KEY, product);
         startActivity(intent);
+      }
+    });
+  }
+
+  @Override
+  public void dismissLoader() {
+    progressDialog.dismiss();
+  }
+
+  //TODO: finish activity unit test means we have to talk to presenter again.
+  @Override
+  public void showErrorDialog(String message) {
+    new AlertDialog.Builder(getActivity()).setMessage(message).setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+      @Override
+      public void onClick(DialogInterface dialogInterface, int i) {
+        getActivity().finish();
       }
     });
   }

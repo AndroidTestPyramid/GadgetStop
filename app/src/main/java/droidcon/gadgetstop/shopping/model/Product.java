@@ -110,4 +110,35 @@ public class Product implements Parcelable {
       return new Product[size];
     }
   };
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    Product product = (Product) o;
+
+    if (productId != product.productId) return false;
+    if (price != product.price) return false;
+    if (upcomingDeal != product.upcomingDeal) return false;
+    if (isNew != product.isNew) return false;
+    if (isPopular != product.isPopular) return false;
+    if (!imageUrl.equals(product.imageUrl)) return false;
+    if (!title.equals(product.title)) return false;
+    return description.equals(product.description);
+
+  }
+
+  @Override
+  public int hashCode() {
+    int result = imageUrl.hashCode();
+    result = 31 * result + productId;
+    result = 31 * result + price;
+    result = 31 * result + title.hashCode();
+    result = 31 * result + description.hashCode();
+    result = 31 * result + upcomingDeal;
+    result = 31 * result + (isNew ? 1 : 0);
+    result = 31 * result + (isPopular ? 1 : 0);
+    return result;
+  }
 }

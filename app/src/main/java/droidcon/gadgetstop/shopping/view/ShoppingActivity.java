@@ -36,6 +36,12 @@ public class ShoppingActivity extends AppCompatActivity {
     setupViewPager();
   }
 
+  private void createFragments() {
+    tabs = new ArrayList<>();
+    tabs.add(new ElectronicsFragment());
+    tabs.add(new AccessoriesFragment());
+  }
+
   @Override
   protected void onResume() {
     super.onResume();
@@ -53,12 +59,6 @@ public class ShoppingActivity extends AppCompatActivity {
     Button cart = (Button) count.findViewById(R.id.num_of_products);
     cart.setText(String.valueOf(numOfProductsInTheCart));
     return super.onCreateOptionsMenu(menu);
-  }
-
-  private void createFragments() {
-    tabs = new ArrayList<>();
-    tabs.add(new ElectronicsFragment());
-    tabs.add(new AccessoriesFragment());
   }
 
   private void setupViewPager() {

@@ -1,4 +1,4 @@
-package droidcon.gadgetstop.shopping.util;
+package droidcon.gadgetstop.shopping.repository;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -13,12 +13,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class ImageCache {
+public class ImageRepository {
+
   private static final String IMAGE_CACHING_PREFERENCES_FILE_NAME = "ImageCachingPreferences";
 
   private Context context;
 
-  public ImageCache(Context context) {
+  public ImageRepository(Context context) {
     this.context = context;
   }
 
@@ -92,3 +93,4 @@ public class ImageCache {
     return cachingSharedPreferences.getBoolean(isExternalMediaUsedKey, false);
   }
 }
+
