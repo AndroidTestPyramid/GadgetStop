@@ -13,19 +13,21 @@ import android.widget.Toast;
 import java.io.InputStream;
 
 import droidcon.gadgetstop.R;
-import droidcon.gadgetstop.shopping.cart.model.ProductInCart;
 import droidcon.gadgetstop.service.APIClient;
 import droidcon.gadgetstop.service.APIClient.RequestType;
 import droidcon.gadgetstop.service.ResponseCallback;
 import droidcon.gadgetstop.service.ResponseDeserializerFactory;
+import droidcon.gadgetstop.shopping.cart.model.ProductInCart;
 import droidcon.gadgetstop.shopping.model.Product;
 import droidcon.gadgetstop.shopping.util.ImageCache;
+import droidcon.gadgetstop.shopping.viewmodel.ProductViewModel;
 
 import static droidcon.gadgetstop.shopping.view.ProductsBaseFragment.PRODUCT_KEY;
 
 public class ProductDetailsActivity extends AppCompatActivity {
 
   private Product product;
+  private ProductViewModel productViewModel;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     final android.support.v7.app.ActionBar actionBar = getSupportActionBar();
     actionBar.setDisplayHomeAsUpEnabled(true);
     product = getIntent().getExtras().getParcelable(PRODUCT_KEY);
+    productViewModel = new ProductViewModel(product, getResources());
     renderProductTitle();
     renderProductDescription();
     renderProductCost();
@@ -59,32 +62,20 @@ public class ProductDetailsActivity extends AppCompatActivity {
   }
 
   private void renderProductPopularity() {
-    String popularity = null;
-    int textColor = 0;
-    TextView popularityView = (TextView)findViewById(R.id.popularity);
-    if(product.isNew()){
-      popularity = getString(R.string.product_new);
-      textColor = R.color.red;
-    }
-    if(product.isPopular()){
-      popularity = getString(R.string.popular);
-      textColor = R.color.purple;
-    }
-    if(popularity != null) {
-      popularityView.setText(popularity);
-      popularityView.setTextColor(getResources().getColor(textColor));
-      popularityView.setVisibility(View.VISIBLE);
-    }
+    TextView popularityView = (TextView) findViewById(R.id.popularity);
+    popularityView.setText(productViewModel.getPopularityLabel());
+    popularityView.setTextColor(getResources().getColor(productViewModel.getPopularityTextColor()));
+    popularityView.setVisibility(productViewModel.getPopularityVisibilityStatus());
   }
 
   private void renderProductDescription() {
     TextView issueDescription = (TextView) findViewById(R.id.product_description);
-    issueDescription.setText(product.getDescription());
+    issueDescription.setText(productViewModel.getDescription());
   }
 
   private void renderProductTitle() {
-    TextView productTitle = (TextView) findViewById(R.id.product_title);
-    productTitle.setText(product.getTitle());
+    TextView titleTextView = (TextView) findViewById(R.id.product_title);
+    titleTextView.setText(productViewModel.getTitle());
   }
 
   private void renderProductImage() {
@@ -100,16 +91,15 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
   private void renderProductCost() {
     TextView costTextView = (TextView) findViewById(R.id.cost);
-    costTextView.setText(String.format("%s%d", getString(R.string.cost), product.getPrice()));
+    costTextView.setText(productViewModel.getPrice());
   }
 
   private void renderProductUpcomingDeal() {
-    if(product.anyUpcomingDeal()){
-      final LinearLayout linearLayout = (LinearLayout) findViewById(R.id.upcoming_deal);
-      linearLayout.setVisibility(View.VISIBLE);
-      final TextView upcomingDeal = (TextView) findViewById(R.id.percentage);
-      upcomingDeal.setText(String.format("%d%s", product.getUpcomingDeal(), getString(R.string.percentage_sign)));
-    }
+    final LinearLayout upcomingDealView = (LinearLayout) findViewById(R.id.upcoming_deal);
+    upcomingDealView.setVisibility(productViewModel.getUpcomingDealVisibilityStatus());
+
+    TextView percentage = (TextView) findViewById(R.id.percentage);
+    percentage.setText(productViewModel.getUpcomingDeal());
   }
 
   private ResponseCallback<Bitmap> bitmapCallback(final ImageView imageView) {
@@ -127,7 +117,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
       @Override
       public void onError(Exception exception) {
-
       }
     };
   }
