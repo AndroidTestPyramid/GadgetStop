@@ -25,4 +25,5 @@
   <string name="percentage_sign">%</string>
   <string name="label_new">New</string>
   <string name="popular">Popular</string>
+  <string name="empty_string">""</string>
 </resources>

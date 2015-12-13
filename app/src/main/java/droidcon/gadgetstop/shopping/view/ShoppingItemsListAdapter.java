@@ -65,8 +65,8 @@ public class ShoppingItemsListAdapter extends BaseAdapter {
   private void renderProductPopularity(View convertView, ProductViewModel productViewModel) {
     TextView popularityView = (TextView) convertView.findViewById(R.id.popularity);
     popularityView.setText(productViewModel.getPopularityLabel());
-    popularityView.setTextColor(convertView.getResources().getColor(productViewModel.getPopularityTextColor()));
-    popularityView.setVisibility(productViewModel.getPopularityVisibilityStatus());
+    popularityView.setTextColor(convertView.getResources().getColor(productViewModel.getPopularityLabelTextColor()));
+    popularityView.setVisibility(productViewModel.getPopularityLabelVisibility());
   }
 
   private void renderProductUpcomingDeal(View convertView, ProductViewModel productViewModel) {
@@ -117,7 +117,6 @@ public class ShoppingItemsListAdapter extends BaseAdapter {
 
       @Override
       public void onError(Exception exception) {
-
       }
     };
   }

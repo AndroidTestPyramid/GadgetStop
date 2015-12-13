@@ -64,8 +64,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
   private void renderProductPopularity() {
     TextView popularityView = (TextView) findViewById(R.id.popularity);
     popularityView.setText(productViewModel.getPopularityLabel());
-    popularityView.setTextColor(getResources().getColor(productViewModel.getPopularityTextColor()));
-    popularityView.setVisibility(productViewModel.getPopularityVisibilityStatus());
+    popularityView.setTextColor(getResources().getColor(productViewModel.getPopularityLabelTextColor()));
+    popularityView.setVisibility(productViewModel.getPopularityLabelVisibility());
   }
 
   private void renderProductDescription() {

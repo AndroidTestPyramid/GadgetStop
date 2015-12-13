@@ -108,7 +108,7 @@ public class ProductViewModelTest {
 
     productViewModel = new ProductViewModel(product, resources);
 
-    assertEquals(View.VISIBLE, productViewModel.getPopularityVisibilityStatus());
+    assertEquals(View.VISIBLE, productViewModel.getPopularityLabelVisibility());
   }
 
   @Test
@@ -118,7 +118,7 @@ public class ProductViewModelTest {
 
     productViewModel = new ProductViewModel(product, resources);
 
-    assertEquals(View.VISIBLE, productViewModel.getPopularityVisibilityStatus());
+    assertEquals(View.VISIBLE, productViewModel.getPopularityLabelVisibility());
   }
 
   @Test
@@ -128,7 +128,7 @@ public class ProductViewModelTest {
 
     productViewModel = new ProductViewModel(product, resources);
 
-    assertEquals(View.VISIBLE, productViewModel.getPopularityVisibilityStatus());
+    assertEquals(View.VISIBLE, productViewModel.getPopularityLabelVisibility());
   }
 
   @Test
@@ -138,7 +138,7 @@ public class ProductViewModelTest {
 
     productViewModel = new ProductViewModel(product, resources);
 
-    assertEquals(R.color.red, productViewModel.getPopularityTextColor());
+    assertEquals(R.color.red, productViewModel.getPopularityLabelTextColor());
   }
 
   @Test
@@ -149,7 +149,7 @@ public class ProductViewModelTest {
 
     productViewModel = new ProductViewModel(product, resources);
 
-    assertEquals(R.color.purple, productViewModel.getPopularityTextColor());
+    assertEquals(R.color.purple, productViewModel.getPopularityLabelTextColor());
   }
 
   @Test
@@ -159,6 +159,6 @@ public class ProductViewModelTest {
 
     productViewModel = new ProductViewModel(product, resources);
 
-    assertEquals(R.color.purple, productViewModel.getPopularityTextColor());
+    assertEquals(R.color.purple, productViewModel.getPopularityLabelTextColor());
   }
 }
