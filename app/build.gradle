@@ -16,11 +16,38 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
+        debug{
+            testCoverageEnabled = true
+        }
     }
     testOptions{
         unitTests.returnDefaultValues = true
     }
 }
+
+apply plugin: 'jacoco'
+jacoco {
+    toolVersion = "0.7.1.201405082137"
+}
+def coverageSourceDirs = [
+        'src/main/java'
+]
+task generateJacocoTestReports(type:JacocoReport, dependsOn: "test") {
+    group = "Reporting"
+    description = "Generate unit test coverage reports"
+    classDirectories = fileTree(
+            dir: 'build/intermediates/classes/debug',
+            excludes: ['**/R.class',
+                       '**/R$*.class',
+                       '**/*$ViewInjector*.*',
+                       '**/BuildConfig.*',
+                       '**/Manifest*.*']
+    )
+    sourceDirectories = files(coverageSourceDirs)
+    additionalSourceDirs = files(coverageSourceDirs)
+    executionData = files('build/jacoco/testDebugUnitTest.exec')
+}
+
 
 dependencies {
     compile 'com.android.support:support-v4:22.2.1'
