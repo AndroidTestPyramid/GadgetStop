@@ -1,0 +1,16 @@
+bin
+gen
+.idea
+local.properties
+*.iml
+out
+*.ipr
+*.iws
+/out
+.DS_Store
+*.patch
+ant.properties
+*.txt
+/app/build/
+.gradle/
+build/*

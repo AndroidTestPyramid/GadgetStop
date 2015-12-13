@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Gadget Stop</string>
+  <string name="electronics">ELECTRONICS</string>
+  <string name="accessories">ACCESSORIES</string>
+  <string name="cart">Cart</string>
+  <string name="prompt_email">Email</string>
+  <string name="prompt_password">Password</string>
+  <string name="action_sign_in">Sign in</string>
+  <string name="error_invalid_email">This email address is invalid</string>
+  <string name="error_invalid_password">This password is too short</string>
+  <string name="error_field_required">This field is required</string>
+  <string name="signing_in">Signing in...</string>
+  <string name="technical_difficulty">There is some technical difficulties</string>
+  <string name="invalid_credential">Invalid Credential</string>
+  <string name="login_header">Please enter registered username and password to sign in</string>
+  <string name="title_activity_product_details">Details</string>
+  <string name="add_to_wishlist">Add to Wishlist</string>
+  <string name="buy">Buy</string>
+  <string name="ok">Ok</string>
+  <string name="loading">Loading...</string>
+  <string name="addedToCart">Item added to cart</string>
+  <string name="upcoming_deal">Upcoming deal</string>
+  <string name="cost">Rs. </string>
+  <string name="percentage_sign">%</string>
+  <string name="product_new">New</string>
+  <string name="popular">Popular</string>
+</resources>
