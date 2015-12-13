@@ -89,7 +89,7 @@ public abstract class ProductsBaseFragment extends Fragment {
       @Override
       public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         Product product = (Product) adapterView.getAdapter().getItem(position);
-        Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
+        Intent intent = new Intent(getActivity(), ProductDetailActivity.class);
         intent.putExtra(PRODUCT_KEY, product);
         startActivity(intent);
       }

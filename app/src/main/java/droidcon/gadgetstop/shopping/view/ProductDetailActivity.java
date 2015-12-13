@@ -24,7 +24,7 @@ import droidcon.gadgetstop.shopping.viewmodel.ProductViewModel;
 
 import static droidcon.gadgetstop.shopping.view.ProductsBaseFragment.PRODUCT_KEY;
 
-public class ProductDetailsActivity extends AppCompatActivity {
+public class ProductDetailActivity extends AppCompatActivity {
 
   private Product product;
   private ProductViewModel productViewModel;
@@ -111,7 +111,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
       @Override
       public void onSuccess(Bitmap response) {
-        new ImageCache(ProductDetailsActivity.this).save(product.getImageUrl(), response);
+        new ImageCache(ProductDetailActivity.this).save(product.getImageUrl(), response);
         imageView.setImageBitmap(response);
       }
 
