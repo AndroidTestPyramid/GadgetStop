@@ -56,7 +56,7 @@ public class ShoppingItemsListAdapter extends BaseAdapter {
     final ProductViewModel productViewModel = new ProductViewModel(product, convertView.getResources());
     renderProductTitle(convertView, productViewModel);
     renderProductImage(convertView, product);
-    renderProductCost(convertView, productViewModel);
+    renderProductPrice(convertView, productViewModel);
     renderProductUpcomingDeal(convertView, productViewModel);
     renderProductPopularity(convertView, productViewModel);
     return convertView;
@@ -87,9 +87,9 @@ public class ShoppingItemsListAdapter extends BaseAdapter {
     fetchBitmap(product.getImageUrl(), imageView);
   }
 
-  private void renderProductCost(View convertView, ProductViewModel productViewModel) {
-    TextView costTextView = (TextView) convertView.findViewById(R.id.cost);
-    costTextView.setText(productViewModel.getPrice());
+  private void renderProductPrice(View convertView, ProductViewModel productViewModel) {
+    TextView priceTextView = (TextView) convertView.findViewById(R.id.price);
+    priceTextView.setText(productViewModel.getPrice());
   }
 
   private void fetchBitmap(String imageUrl, ImageView imageView) {

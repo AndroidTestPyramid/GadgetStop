@@ -39,7 +39,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     productViewModel = new ProductViewModel(product, getResources());
     renderProductTitle();
     renderProductDescription();
-    renderProductCost();
+    renderProductPrice();
     renderProductImage();
     renderProductUpcomingDeal();
     renderProductPopularity();
@@ -89,9 +89,9 @@ public class ProductDetailsActivity extends AppCompatActivity {
     }
   }
 
-  private void renderProductCost() {
-    TextView costTextView = (TextView) findViewById(R.id.cost);
-    costTextView.setText(productViewModel.getPrice());
+  private void renderProductPrice() {
+    TextView priceTextView = (TextView) findViewById(R.id.price);
+    priceTextView.setText(productViewModel.getPrice());
   }
 
   private void renderProductUpcomingDeal() {

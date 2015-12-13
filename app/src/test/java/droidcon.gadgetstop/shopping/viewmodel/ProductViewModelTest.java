@@ -22,9 +22,9 @@ public class ProductViewModelTest {
   @Before
   public void setup(){
     resources = mock(Resources.class);
-    when(resources.getString(R.string.cost)).thenReturn("Rs. ");
+    when(resources.getString(R.string.indian_currency)).thenReturn("Rs. ");
     when(resources.getString(R.string.percentage_sign)).thenReturn("%");
-    when(resources.getString(R.string.product_new)).thenReturn("New");
+    when(resources.getString(R.string.label_new)).thenReturn("New");
     when(resources.getString(R.string.popular)).thenReturn("Popular");
 
     Product product = new ProductBuilder()

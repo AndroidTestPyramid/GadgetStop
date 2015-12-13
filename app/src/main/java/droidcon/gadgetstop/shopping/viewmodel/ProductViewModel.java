@@ -20,7 +20,7 @@ public class ProductViewModel  {
   }
 
   public String getPrice() {
-    return String.format("%s%d", resources.getString(R.string.cost), product.getPrice());
+    return String.format("%s%d", resources.getString(R.string.indian_currency), product.getPrice());
   }
 
   public String getUpcomingDeal() {
@@ -41,7 +41,7 @@ public class ProductViewModel  {
       return resources.getString(R.string.popular);
     }
     if (product.isNew()) {
-      return resources.getString(R.string.product_new);
+      return resources.getString(R.string.label_new);
     }
     return "";
   }
