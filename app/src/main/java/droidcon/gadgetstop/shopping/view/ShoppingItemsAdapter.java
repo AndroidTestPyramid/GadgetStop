@@ -22,10 +22,10 @@ import droidcon.gadgetstop.service.ResponseDeserializerFactory;
 import droidcon.gadgetstop.shopping.model.Product;
 import droidcon.gadgetstop.shopping.util.ImageCache;
 
-public class ShoppingItemsListAdapter extends BaseAdapter {
+public class ShoppingItemsAdapter extends BaseAdapter {
   public List<Product> products = new ArrayList<>();
 
-  public ShoppingItemsListAdapter(List<Product> products) {
+  public ShoppingItemsAdapter(List<Product> products) {
     this.products = products;
   }
 
