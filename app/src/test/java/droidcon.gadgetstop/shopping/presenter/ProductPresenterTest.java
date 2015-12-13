@@ -22,8 +22,9 @@ public class ProductPresenterTest {
 
     final ImagePresenter imagePresenter = mock(ImagePresenter.class);
     final Resources resources = mock(Resources.class);
-    when(resources.getString(R.string.cost)).thenReturn("Rs. ");
+    when(resources.getString(R.string.currency)).thenReturn("Rs. ");
     when(resources.getString(R.string.percentage_sign)).thenReturn("%");
+    when(resources.getString(R.string.empty_string)).thenReturn("");
 
     Product product = new ProductBuilder()
         .withTitle("watch")
@@ -35,7 +36,7 @@ public class ProductPresenterTest {
     productPresenter.renderView();
 
     verify(productView).renderProductTitle("watch");
-    verify(productView).renderProductCost("Rs. 25");
+    verify(productView).renderProductPrice("Rs. 25");
     verify(productView).renderProductUpcomingDeal(View.VISIBLE, "50%");
     verify(productView).renderProductPopularity("", R.color.white, View.GONE);
   }

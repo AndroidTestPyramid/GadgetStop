@@ -59,7 +59,7 @@ public class ProductDetailActivityTest {
   public void shouldShowDetailsOfTheProduct() throws IOException {
     onView(withId(R.id.product_title)).check(matches(withText("ProductTitle")));
     onView(withId(R.id.product_description)).check(matches(withText("ProductDesc")));
-    onView(withId(R.id.cost)).check(matches(withText("Rs.20")));
+    onView(withId(R.id.price)).check(matches(withText("Rs.20")));
     onView(withId(R.id.upcoming_deal)).check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
     onView(withText(R.string.upcoming_deal)).check(matches(isDisplayed()));
     onView(withId(R.id.percentage)).check(matches(withText("30%")));

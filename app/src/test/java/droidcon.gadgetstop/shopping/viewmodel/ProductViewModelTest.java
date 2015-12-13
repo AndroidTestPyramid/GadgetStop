@@ -22,9 +22,9 @@ public class ProductViewModelTest {
   @Before
   public void setup(){
     resources = mock(Resources.class);
-    when(resources.getString(R.string.cost)).thenReturn("Rs. ");
+    when(resources.getString(R.string.currency)).thenReturn("Rs. ");
     when(resources.getString(R.string.percentage_sign)).thenReturn("%");
-    when(resources.getString(R.string.product_new)).thenReturn("New");
+    when(resources.getString(R.string.label_new)).thenReturn("New");
     when(resources.getString(R.string.popular)).thenReturn("Popular");
 
     Product product = new ProductBuilder()
@@ -108,7 +108,7 @@ public class ProductViewModelTest {
 
     productViewModel = new ProductViewModel(product, resources);
 
-    assertEquals(View.VISIBLE, productViewModel.getPopularityVisibilityStatus());
+    assertEquals(View.VISIBLE, productViewModel.getPopularityLabelVisibility());
   }
 
   @Test
@@ -118,7 +118,7 @@ public class ProductViewModelTest {
 
     productViewModel = new ProductViewModel(product, resources);
 
-    assertEquals(View.VISIBLE, productViewModel.getPopularityVisibilityStatus());
+    assertEquals(View.VISIBLE, productViewModel.getPopularityLabelVisibility());
   }
 
   @Test
@@ -128,7 +128,7 @@ public class ProductViewModelTest {
 
     productViewModel = new ProductViewModel(product, resources);
 
-    assertEquals(View.VISIBLE, productViewModel.getPopularityVisibilityStatus());
+    assertEquals(View.VISIBLE, productViewModel.getPopularityLabelVisibility());
   }
 
   @Test
@@ -138,7 +138,7 @@ public class ProductViewModelTest {
 
     productViewModel = new ProductViewModel(product, resources);
 
-    assertEquals(R.color.red, productViewModel.getPopularityTextColor());
+    assertEquals(R.color.red, productViewModel.getPopularityLabelTextColor());
   }
 
   @Test
@@ -149,7 +149,7 @@ public class ProductViewModelTest {
 
     productViewModel = new ProductViewModel(product, resources);
 
-    assertEquals(R.color.purple, productViewModel.getPopularityTextColor());
+    assertEquals(R.color.purple, productViewModel.getPopularityLabelTextColor());
   }
 
   @Test
@@ -159,6 +159,6 @@ public class ProductViewModelTest {
 
     productViewModel = new ProductViewModel(product, resources);
 
-    assertEquals(R.color.purple, productViewModel.getPopularityTextColor());
+    assertEquals(R.color.purple, productViewModel.getPopularityLabelTextColor());
   }
 }

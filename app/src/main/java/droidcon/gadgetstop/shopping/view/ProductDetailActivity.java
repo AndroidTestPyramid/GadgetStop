@@ -83,9 +83,9 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
   }
 
   @Override
-  public void renderProductCost(String price) {
-    TextView productCostTextView = (TextView) findViewById(R.id.cost);
-    productCostTextView.setText(price);
+  public void renderProductPrice(String price) {
+    TextView productPriceTextView = (TextView) findViewById(R.id.price);
+    productPriceTextView.setText(price);
   }
 
   @Override

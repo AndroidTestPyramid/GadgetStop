@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:gravity="right"
             android:textSize="18sp"
-            android:text="@string/product_new"
+            android:text="@string/label_new"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:visibility="gone"/>
@@ -61,7 +61,7 @@
                 android:paddingTop="5dp">
 
                 <TextView
-                    android:id="@+id/cost"
+                    android:id="@+id/price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"

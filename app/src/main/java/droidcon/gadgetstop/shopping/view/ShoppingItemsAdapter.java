@@ -58,7 +58,7 @@ public class ShoppingItemsAdapter extends BaseAdapter implements ProductView {
       viewHolder.upcomingDeal = (TextView) convertView.findViewById(R.id.percentage);
       viewHolder.upcomingDealLayout = (LinearLayout) convertView.findViewById(R.id.upcoming_deal);
       viewHolder.productTitleTextView = (TextView) convertView.findViewById(R.id.title);
-      viewHolder.productCostTextView = (TextView) convertView.findViewById(R.id.cost);
+      viewHolder.productPriceTextView = (TextView) convertView.findViewById(R.id.price);
       convertView.setTag(viewHolder);
     } else {
       viewHolder = (ViewHolderItem) convertView.getTag();
@@ -94,8 +94,8 @@ public class ShoppingItemsAdapter extends BaseAdapter implements ProductView {
   }
 
   @Override
-  public void renderProductCost(String price) {
-    viewHolder.productCostTextView.setText(price);
+  public void renderProductPrice(String price) {
+    viewHolder.productPriceTextView.setText(price);
   }
 
   @Override
@@ -112,6 +112,6 @@ public class ShoppingItemsAdapter extends BaseAdapter implements ProductView {
     LinearLayout upcomingDealLayout;
     TextView upcomingDeal;
     TextView productTitleTextView;
-    TextView productCostTextView;
+    TextView productPriceTextView;
   }
 }

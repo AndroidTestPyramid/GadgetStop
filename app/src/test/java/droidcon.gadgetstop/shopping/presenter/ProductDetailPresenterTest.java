@@ -28,7 +28,7 @@ public class ProductDetailPresenterTest {
         .withDescription("watch_desc").build();
 
     final Resources resources = mock(Resources.class);
-    when(resources.getString(R.string.cost)).thenReturn("Rs. ");
+    when(resources.getString(R.string.currency)).thenReturn("Rs. ");
     when(resources.getString(R.string.percentage_sign)).thenReturn("%");
 
     productDetailView = mock(ProductDetailView.class);

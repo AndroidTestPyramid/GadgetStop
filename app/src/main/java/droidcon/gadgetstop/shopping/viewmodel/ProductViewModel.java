@@ -9,10 +9,12 @@ import droidcon.gadgetstop.shopping.model.Product;
 public class ProductViewModel  {
   private final Product product;
   private final Resources resources;
+  private final PopularityLabel popularityLabel;
 
   public ProductViewModel(Product product, Resources resources) {
     this.product = product;
     this.resources = resources;
+    popularityLabel = PopularityLabel.createFrom(product);
   }
 
   public String getTitle() {
@@ -20,7 +22,7 @@ public class ProductViewModel  {
   }
 
   public String getPrice() {
-    return String.format("%s%d", resources.getString(R.string.cost), product.getPrice());
+    return String.format("%s%d", resources.getString(R.string.currency), product.getPrice());
   }
 
   public String getUpcomingDeal() {
@@ -35,39 +37,61 @@ public class ProductViewModel  {
     return View.GONE;
   }
 
-  //TODO: Repeated - should move to constructor?
   public String getPopularityLabel() {
-    if (product.isPopular()) {
-      return resources.getString(R.string.popular);
-    }
-    if (product.isNew()) {
-      return resources.getString(R.string.product_new);
-    }
-    return "";
+    return resources.getString(popularityLabel.getTextId());
   }
 
-  public int getPopularityVisibilityStatus() {
-    if (product.isNew() || product.isPopular()) {
-      return View.VISIBLE;
-    }
-    return View.GONE;
+  public int getPopularityLabelVisibility() {
+    return popularityLabel.getVisibility();
   }
 
   public String getDescription() {
     return product.getDescription();
   }
 
-  public int getPopularityTextColor() {
-    if (product.isPopular()) {
-      return R.color.purple;
-    }
-    if (product.isNew()) {
-      return R.color.red;
-    }
-    return R.color.white;
+  public int getPopularityLabelTextColor() {
+    return popularityLabel.getColor();
   }
 
   private boolean anyUpcomingDeal() {
     return product.getUpcomingDeal() != 0;
+  }
+
+  private enum PopularityLabel {
+    POPULAR(R.string.popular, R.color.purple, View.VISIBLE),
+    NEW(R.string.label_new, R.color.red, View.VISIBLE),
+    DEFAULT(R.string.empty_string, R.color.white, View.GONE);
+
+    private final int textId;
+    private final int color;
+    private final int visibility;
+
+    PopularityLabel(int textId, int color, int visibility) {
+      this.textId = textId;
+      this.color = color;
+      this.visibility = visibility;
+    }
+
+    public static PopularityLabel createFrom(Product product){
+      if (product.isPopular()) {
+        return POPULAR;
+      }
+      if (product.isNew()) {
+        return NEW;
+      }
+      return DEFAULT;
+    }
+
+    public int getTextId() {
+      return textId;
+    }
+
+    public int getColor() {
+      return color;
+    }
+
+    public int getVisibility() {
+      return visibility;
+    }
   }
 }
