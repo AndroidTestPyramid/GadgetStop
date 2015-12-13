@@ -14,5 +14,5 @@ public interface LoginView {
 
   void navigateToShoppingActivity();
 
-  void showTechnicalDifficultyError(int technical_difficulty);
+  void showTechnicalDifficultyError(int technicalDifficulty);
 }
