@@ -63,7 +63,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     int textColor = 0;
     TextView popularityView = (TextView)findViewById(R.id.popularity);
     if(product.isNew()){
-      popularity = getString(R.string.product_new);
+      popularity = getString(R.string.label_new);
       textColor = R.color.red;
     }
     if(product.isPopular()){
@@ -99,8 +99,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
   }
 
   private void renderProductCost() {
-    TextView costTextView = (TextView) findViewById(R.id.cost);
-    costTextView.setText(String.format("%s%d", getString(R.string.cost), product.getPrice()));
+    TextView priceTextView = (TextView) findViewById(R.id.price);
+    priceTextView.setText(String.format("%s%d", getString(R.string.indian_currency), product.getPrice()));
   }
 
   private void renderProductUpcomingDeal() {

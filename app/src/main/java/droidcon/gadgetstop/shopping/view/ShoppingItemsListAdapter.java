@@ -65,7 +65,7 @@ public class ShoppingItemsListAdapter extends BaseAdapter {
     Context context = convertView.getContext();
     TextView popularityView = (TextView) convertView.findViewById(R.id.popularity);
     if(product.isNew()){
-      popularity = context.getString(R.string.product_new);
+      popularity = context.getString(R.string.label_new);
       textColor = R.color.red;
     }
     if(product.isPopular()){
@@ -101,8 +101,8 @@ public class ShoppingItemsListAdapter extends BaseAdapter {
   }
 
   private void renderProductCost(View convertView, Product product) {
-    TextView costTextView = (TextView) convertView.findViewById(R.id.cost);
-    costTextView.setText(String.format("%s%d", convertView.getContext().getString(R.string.cost), product.getPrice()));
+    TextView priceTextView = (TextView) convertView.findViewById(R.id.price);
+    priceTextView.setText(String.format("%s%d", convertView.getContext().getString(R.string.indian_currency), product.getPrice()));
   }
 
   private void fetchBitmap(String imageUrl, ImageView imageView) {
