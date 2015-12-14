@@ -10,4 +10,8 @@ public class ProductInCart extends SugarRecord<ProductInCart> {
   public ProductInCart(int productId) {
     this.productId = productId;
   }
+
+  public int getProductId() {
+    return productId;
+  }
 }

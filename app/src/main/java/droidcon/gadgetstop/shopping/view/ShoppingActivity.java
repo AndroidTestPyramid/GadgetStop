@@ -20,6 +20,7 @@ import java.util.List;
 
 import droidcon.gadgetstop.R;
 import droidcon.gadgetstop.shopping.cart.model.ProductInCart;
+import droidcon.gadgetstop.shopping.repository.ProductRepository;
 
 public class ShoppingActivity extends AppCompatActivity {
 
@@ -94,7 +95,7 @@ public class ShoppingActivity extends AppCompatActivity {
   }
 
   private void setNumOfProductsInCart(){
-    numOfProductsInTheCart = ProductInCart.count(ProductInCart.class, null, null);
+    numOfProductsInTheCart = new ProductRepository().totalCountOfProducts();
     invalidateOptionsMenu();
   }
 

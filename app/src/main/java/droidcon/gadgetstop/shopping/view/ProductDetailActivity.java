@@ -1,5 +1,8 @@
 package droidcon.gadgetstop.shopping.view;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +21,7 @@ import droidcon.gadgetstop.shopping.presenter.ImagePresenter;
 import droidcon.gadgetstop.shopping.presenter.ProductDetailPresenter;
 import droidcon.gadgetstop.shopping.presenter.ProductPresenter;
 import droidcon.gadgetstop.shopping.repository.ImageRepository;
+import droidcon.gadgetstop.shopping.repository.ProductRepository;
 import droidcon.gadgetstop.shopping.service.ImageFetcher;
 
 import static droidcon.gadgetstop.shopping.view.ProductsBaseFragment.PRODUCT_KEY;
@@ -40,14 +44,14 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
 
     final ProductPresenter productPresenter = new ProductPresenter(this, product, new ImagePresenter(this, imageFetcher, imageRepository), getResources());
 
-    productDetailPresenter = new ProductDetailPresenter(this, product, getResources(), productPresenter);
+    productDetailPresenter = new ProductDetailPresenter(this, product, getResources(), productPresenter, new ProductRepository());
 
     productDetailPresenter.renderDetailedView();
     productDetailPresenter.renderImageFor((ImageView) findViewById(R.id.product_image));
   }
 
   public void addToCart(View view) {
-    productDetailPresenter.saveProduct(new ProductInCart(product.getProductId()));
+    productDetailPresenter.saveProduct(product);
   }
 
   @Override
@@ -102,5 +106,15 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
   @Override
   public void showToastWithMessage(String message) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+  }
+
+  @Override
+  public void showDialogWithMessage(String message) {
+    new AlertDialog.Builder(this).setMessage(message).setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+      @Override
+      public void onClick(DialogInterface dialogInterface, int i) {
+        dialogInterface.dismiss();
+      }
+    }).show();
   }
 }

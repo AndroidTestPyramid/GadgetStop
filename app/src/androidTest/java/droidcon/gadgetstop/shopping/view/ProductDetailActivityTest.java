@@ -77,4 +77,16 @@ public class ProductDetailActivityTest {
     long numOfProductsInTheCart = ProductInCart.count(ProductInCart.class, null, null);
     assertEquals(1, numOfProductsInTheCart);
   }
+
+  @Test
+  public void shouldNotAddItemToCartIfAlreadyPresent() throws IOException {
+    new ProductInCart(0).save();
+
+    onView(withId(R.id.product_details)).perform(scrollTo());
+    onView(withId(R.id.add_to_cart)).perform(click());
+    onView(withText(R.string.already_added_to_cart)).inRoot(withDecorView(not(activityTestRule.getActivity().getWindow().getDecorView()))).check(matches(isDisplayed()));
+
+    long numOfProductsInTheCart = ProductInCart.count(ProductInCart.class, null, null);
+    assertEquals(1, numOfProductsInTheCart);
+  }
 }
