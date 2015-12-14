@@ -1,5 +1,7 @@
 package droidcon.gadgetstop.shopping.view;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.InputStream;
+import java.util.List;
 
 import droidcon.gadgetstop.R;
 import droidcon.gadgetstop.shopping.cart.model.ProductInCart;
@@ -43,9 +46,27 @@ public class ProductDetailActivity extends AppCompatActivity {
   }
 
   public void addToCart(View view) {
-    Toast.makeText(this, R.string.addedToCart, Toast.LENGTH_SHORT).show();
-    final ProductInCart productInCart = new ProductInCart(product.getProductId());
-    productInCart.save();
+    List<ProductInCart> productsInCart = ProductInCart.find(ProductInCart.class, "product_id=?", String.valueOf(product.getProductId()));
+    if (productsInCart.size() > 0) {
+      showDialogWithMessage(R.string.already_added_to_cart);
+    } else {
+      ProductInCart productInCart = new ProductInCart(product.getProductId());
+      productInCart.save();
+      showToastWithMessage(R.string.addedToCart);
+    }
+  }
+
+  private void showToastWithMessage(int message) {
+    Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+  }
+
+  private void showDialogWithMessage(int message) {
+    new AlertDialog.Builder(this).setMessage(message).setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+      @Override
+      public void onClick(DialogInterface dialogInterface, int i) {
+        dialogInterface.dismiss();
+      }
+    }).show();
   }
 
   @Override
