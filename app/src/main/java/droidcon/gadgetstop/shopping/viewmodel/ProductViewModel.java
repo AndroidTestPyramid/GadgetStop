@@ -23,18 +23,6 @@ public class ProductViewModel  {
     return String.format("%s%d", resources.getString(R.string.indian_currency), product.getPrice());
   }
 
-  public String getUpcomingDeal() {
-    if (anyUpcomingDeal())
-      return String.format("%d%s", product.getUpcomingDeal(), resources.getString(R.string.percentage_sign));
-    return "";
-  }
-
-  public int getUpcomingDealVisibilityStatus() {
-    if (anyUpcomingDeal())
-      return View.VISIBLE;
-    return View.GONE;
-  }
-
   public String getPopularityLabel() {
     if (product.isPopular()) {
       return resources.getString(R.string.popular);
@@ -64,9 +52,5 @@ public class ProductViewModel  {
       return R.color.red;
     }
     return R.color.white;
-  }
-
-  private boolean anyUpcomingDeal() {
-    return product.getUpcomingDeal() != 0;
   }
 }

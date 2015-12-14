@@ -57,7 +57,6 @@ public class ShoppingItemsAdapter extends BaseAdapter {
     renderProductTitle(convertView, productViewModel);
     renderProductImage(convertView, product);
     renderProductPrice(convertView, productViewModel);
-    renderProductUpcomingDeal(convertView, productViewModel);
     renderProductPopularity(convertView, productViewModel);
     return convertView;
   }
@@ -67,14 +66,6 @@ public class ShoppingItemsAdapter extends BaseAdapter {
     popularityView.setText(productViewModel.getPopularityLabel());
     popularityView.setTextColor(convertView.getResources().getColor(productViewModel.getPopularityLabelTextColor()));
     popularityView.setVisibility(productViewModel.getPopularityLabelVisibility());
-  }
-
-  private void renderProductUpcomingDeal(View convertView, ProductViewModel productViewModel) {
-    final LinearLayout upcomingDealView = (LinearLayout) convertView.findViewById(R.id.upcoming_deal);
-    upcomingDealView.setVisibility(productViewModel.getUpcomingDealVisibilityStatus());
-
-    TextView percentage = (TextView) convertView.findViewById(R.id.percentage);
-    percentage.setText(productViewModel.getUpcomingDeal());
   }
 
   private void renderProductTitle(View convertView, ProductViewModel productViewModel) {

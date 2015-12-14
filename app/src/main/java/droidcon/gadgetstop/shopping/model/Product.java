@@ -16,18 +16,15 @@ public class Product implements Parcelable {
   private final int price;
   private final String title;
   private final String description;
-  @SerializedName("upcoming_deal")
-  private final int upcomingDeal;
   private final boolean isNew;
   private final boolean isPopular;
 
-  public Product(int productId, String imageUrl, int price, String title, String description, int upcomingDeal, boolean isNew, boolean isPopular) {
+  public Product(int productId, String imageUrl, int price, String title, String description, boolean isNew, boolean isPopular) {
     this.imageUrl = imageUrl;
     this.productId = productId;
     this.price = price;
     this.title = title;
     this.description = description;
-    this.upcomingDeal = upcomingDeal;
     this.isNew = isNew;
     this.isPopular = isPopular;
   }
@@ -52,20 +49,12 @@ public class Product implements Parcelable {
     return price;
   }
 
-  public int getUpcomingDeal() {
-    return upcomingDeal;
-  }
-
   public boolean isNew() {
     return isNew;
   }
 
   public boolean isPopular() {
     return isPopular;
-  }
-
-  public boolean anyUpcomingDeal() {
-    return upcomingDeal != 0;
   }
 
   @Override
@@ -85,7 +74,6 @@ public class Product implements Parcelable {
     dest.writeString(description);
     dest.writeString(imageUrl);
     dest.writeInt(price);
-    dest.writeInt(upcomingDeal);
     dest.writeByte(isNew ? BYTE_TRUE : BYTE_FALSE);
     dest.writeInt(isPopular ? BYTE_TRUE : BYTE_FALSE);
   }
@@ -96,7 +84,6 @@ public class Product implements Parcelable {
     this.description = in.readString();
     this.imageUrl = in.readString();
     this.price = in.readInt();
-    this.upcomingDeal = in.readInt();
     this.isNew = in.readByte() == BYTE_TRUE;
     this.isPopular = in.readByte() == BYTE_TRUE;
   }

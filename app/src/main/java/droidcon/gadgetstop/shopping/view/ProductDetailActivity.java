@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,7 +43,6 @@ public class ProductDetailActivity extends AppCompatActivity {
     renderProductDescription();
     renderProductPrice();
     renderProductImage();
-    renderProductUpcomingDeal();
     renderProductPopularity();
   }
 
@@ -113,14 +111,6 @@ public class ProductDetailActivity extends AppCompatActivity {
   private void renderProductPrice() {
     TextView priceTextView = (TextView) findViewById(R.id.price);
     priceTextView.setText(productViewModel.getPrice());
-  }
-
-  private void renderProductUpcomingDeal() {
-    final LinearLayout upcomingDealView = (LinearLayout) findViewById(R.id.upcoming_deal);
-    upcomingDealView.setVisibility(productViewModel.getUpcomingDealVisibilityStatus());
-
-    TextView percentage = (TextView) findViewById(R.id.percentage);
-    percentage.setText(productViewModel.getUpcomingDeal());
   }
 
   private ResponseCallback<Bitmap> bitmapCallback(final ImageView imageView) {
