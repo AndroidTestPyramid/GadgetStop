@@ -24,7 +24,6 @@ public class ProductPresenter {
   public void renderView() {
     productView.renderProductTitle(productViewModel.getTitle());
     productView.renderProductPrice(productViewModel.getPrice());
-    productView.renderProductUpcomingDeal(productViewModel.getUpcomingDealVisibilityStatus(), productViewModel.getUpcomingDeal());
     productView.renderProductPopularity(productViewModel.getPopularityLabel(), productViewModel.getPopularityLabelTextColor(), productViewModel.getPopularityLabelVisibility());
   }
 

@@ -55,8 +55,6 @@ public class ShoppingItemsAdapter extends BaseAdapter implements ProductView {
       convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_layout, parent, false);
       viewHolder = new ViewHolderItem();
       viewHolder.popularityLabelTextView = (TextView) convertView.findViewById(R.id.popularity);
-      viewHolder.upcomingDeal = (TextView) convertView.findViewById(R.id.percentage);
-      viewHolder.upcomingDealLayout = (LinearLayout) convertView.findViewById(R.id.upcoming_deal);
       viewHolder.productTitleTextView = (TextView) convertView.findViewById(R.id.title);
       viewHolder.productPriceTextView = (TextView) convertView.findViewById(R.id.price);
       convertView.setTag(viewHolder);
@@ -83,12 +81,6 @@ public class ShoppingItemsAdapter extends BaseAdapter implements ProductView {
   }
 
   @Override
-  public void renderProductUpcomingDeal(int upcomingDealVisibilityStatus, String upcomingDeal) {
-    viewHolder.upcomingDealLayout.setVisibility(upcomingDealVisibilityStatus);
-    viewHolder.upcomingDeal.setText(upcomingDeal);
-  }
-
-  @Override
   public void renderProductTitle(String title) {
     viewHolder.productTitleTextView.setText(title);
   }
@@ -109,8 +101,6 @@ public class ShoppingItemsAdapter extends BaseAdapter implements ProductView {
 
   static class ViewHolderItem {
     TextView popularityLabelTextView;
-    LinearLayout upcomingDealLayout;
-    TextView upcomingDeal;
     TextView productTitleTextView;
     TextView productPriceTextView;
   }

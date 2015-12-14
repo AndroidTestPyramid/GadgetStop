@@ -49,7 +49,7 @@ public class ProductDetailActivityTest {
   public void setup() throws IOException {
     mockWebServerRule.mockResponse("/sample_images/nexus_5_case11.jpg", APIClient.RequestType.GET.name(), readFrom("ic_launcher.png", getContext()));
 
-    Product product = new Product(0, "http://localhost:4568/sample_images/nexus_5_case11.jpg", 20, "ProductTitle", "ProductDesc", 30, false, true);
+    Product product = new Product(0, "http://localhost:4568/sample_images/nexus_5_case11.jpg", 20, "ProductTitle", "ProductDesc", false, true);
     Intent intent = new Intent();
     intent.putExtra(ProductsBaseFragment.PRODUCT_KEY, product);
     activityTestRule.launchActivity(intent);
@@ -60,9 +60,6 @@ public class ProductDetailActivityTest {
     onView(withId(R.id.product_title)).check(matches(withText("ProductTitle")));
     onView(withId(R.id.product_description)).check(matches(withText("ProductDesc")));
     onView(withId(R.id.price)).check(matches(withText("Rs.20")));
-    onView(withId(R.id.upcoming_deal)).check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
-    onView(withText(R.string.upcoming_deal)).check(matches(isDisplayed()));
-    onView(withId(R.id.percentage)).check(matches(withText("30%")));
     onView(withId(R.id.popularity)).check(matches(withText("Popular")));
   }
 

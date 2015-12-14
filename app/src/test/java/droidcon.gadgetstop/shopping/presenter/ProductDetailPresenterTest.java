@@ -28,7 +28,6 @@ public class ProductDetailPresenterTest {
     product = new ProductBuilder()
         .withPrice(25)
         .withTitle("watch")
-        .withUpcomingDeal(50)
         .withDescription("watch_desc").build();
 
     final Resources resources = mock(Resources.class);

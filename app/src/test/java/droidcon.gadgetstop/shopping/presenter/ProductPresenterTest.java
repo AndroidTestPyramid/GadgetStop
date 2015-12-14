@@ -28,8 +28,7 @@ public class ProductPresenterTest {
 
     Product product = new ProductBuilder()
         .withTitle("watch")
-        .withPrice(25)
-        .withUpcomingDeal(50).build();
+        .withPrice(25).build();
 
     final ProductPresenter productPresenter = new ProductPresenter(productView, product, imagePresenter, resources);
 
@@ -37,7 +36,6 @@ public class ProductPresenterTest {
 
     verify(productView).renderProductTitle("watch");
     verify(productView).renderProductPrice("Rs. 25");
-    verify(productView).renderProductUpcomingDeal(View.VISIBLE, "50%");
     verify(productView).renderProductPopularity("", R.color.white, View.GONE);
   }
 }

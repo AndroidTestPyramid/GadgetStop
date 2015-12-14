@@ -25,17 +25,6 @@ public class ProductViewModel  {
     return String.format("%s%d", resources.getString(R.string.currency), product.getPrice());
   }
 
-  public String getUpcomingDeal() {
-    if (anyUpcomingDeal())
-      return String.format("%d%s", product.getUpcomingDeal(), resources.getString(R.string.percentage_sign));
-    return "";
-  }
-
-  public int getUpcomingDealVisibilityStatus() {
-    if (anyUpcomingDeal())
-      return View.VISIBLE;
-    return View.GONE;
-  }
 
   public String getPopularityLabel() {
     return resources.getString(popularityLabel.getTextId());
@@ -51,10 +40,6 @@ public class ProductViewModel  {
 
   public int getPopularityLabelTextColor() {
     return popularityLabel.getColor();
-  }
-
-  private boolean anyUpcomingDeal() {
-    return product.getUpcomingDeal() != 0;
   }
 
   private enum PopularityLabel {

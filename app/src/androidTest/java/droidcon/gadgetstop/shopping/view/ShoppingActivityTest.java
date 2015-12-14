@@ -36,7 +36,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.withContentDesc
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static droidcon.gadgetstop.util.TestUtilities.readInputStreamFrom;
-import static org.hamcrest.CoreMatchers.anyOf;
 import static org.hamcrest.Matchers.allOf;
 
 @RunWith(AndroidJUnit4.class)
@@ -53,8 +52,8 @@ public class ShoppingActivityTest {
 
   @Before
   public void setup() throws IOException {
-    String electronics = "[{\"product_id\":1,\"title\": \"Snoogg Peacock Real Case Cover For Google Nexus 5\",\"description\": \"Slim, light ,Sturdy & stylish polycarbonate case\", \"image_url\": \"http://localhost:4568/sample_images/nexus_5_case11.jpg\",\"isNew\":true,\"isPopular\":true,\"upcoming_deal\":51,\"price\":899}]";
-    String accessories = "[{\"product_id\":2,\"title\": \"Snoogg Peacock\",\"description\": \"Slim, light ,Sturdy & stylish polycarbonate case\", \"image_url\": \"http://localhost:4568/sample_images/nexus_5_case11.jpg\",\"isNew\":true,\"isPopular\":true,\"upcoming_deal\":51,\"price\":2500}]";
+    String electronics = "[{\"product_id\":1,\"title\": \"Snoogg Peacock Real Case Cover For Google Nexus 5\",\"description\": \"Slim, light ,Sturdy & stylish polycarbonate case\", \"image_url\": \"http://localhost:4568/sample_images/nexus_5_case11.jpg\",\"isNew\":true,\"isPopular\":true,\"price\":899}]";
+    String accessories = "[{\"product_id\":2,\"title\": \"Snoogg Peacock\",\"description\": \"Slim, light ,Sturdy & stylish polycarbonate case\", \"image_url\": \"http://localhost:4568/sample_images/nexus_5_case11.jpg\",\"isNew\":true,\"isPopular\":true,\"price\":2500}]";
 
     mockWebServerRule.mockResponse("/sample_images/droidcon_electronics.json", APIClient.RequestType.GET.name(), electronics);
     mockWebServerRule.mockResponse("/sample_images/droidcon_accessories.json", APIClient.RequestType.GET.name(), accessories);
@@ -84,8 +83,7 @@ public class ShoppingActivityTest {
     final Product product = new Product(2,
         "http://localhost:4568/sample_images/nexus_5_case11.jpg", 2500,
         "Snoogg Peacock",
-        "Slim, light ,Sturdy & stylish polycarbonate case",
-        51, true, true);
+        "Slim, light ,Sturdy & stylish polycarbonate case", true, true);
 
     intending(anyIntent()).respondWith(new Instrumentation.ActivityResult(RESULT_OK, new Intent()));
 

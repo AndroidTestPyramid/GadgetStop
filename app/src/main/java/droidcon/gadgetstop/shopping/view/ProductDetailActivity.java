@@ -73,14 +73,6 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
   }
 
   @Override
-  public void renderProductUpcomingDeal(int upcomingDealVisibilityStatus, String upcomingDeal) {
-    final LinearLayout upcomingDealLayout = (LinearLayout) findViewById(R.id.upcoming_deal);
-    final TextView upcomingDealTextView = (TextView) findViewById(R.id.percentage);
-    upcomingDealLayout.setVisibility(upcomingDealVisibilityStatus);
-    upcomingDealTextView.setText(upcomingDeal);
-  }
-
-  @Override
   public void renderProductTitle(String title) {
     final TextView titleTextView = (TextView) findViewById(R.id.product_title);
     titleTextView.setText(title);

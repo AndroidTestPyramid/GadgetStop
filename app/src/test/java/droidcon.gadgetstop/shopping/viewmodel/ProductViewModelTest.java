@@ -28,8 +28,7 @@ public class ProductViewModelTest {
     when(resources.getString(R.string.popular)).thenReturn("Popular");
 
     Product product = new ProductBuilder()
-        .withPrice(25)
-        .withUpcomingDeal(50).build();
+        .withPrice(25).build();
 
     productViewModel = new ProductViewModel(product, resources);
   }
@@ -37,36 +36,6 @@ public class ProductViewModelTest {
   @Test
   public void shouldGetMassagedPrice(){
     assertEquals("Rs. 25", productViewModel.getPrice());
-  }
-
-  @Test
-  public void shouldGetMassagedUpcomingDeal(){
-    assertEquals("50%", productViewModel.getUpcomingDeal());
-  }
-
-  @Test
-  public void shouldGetEmptyUpcomingDeal(){
-    Product product = new ProductBuilder()
-        .withUpcomingDeal(0).build();
-
-    productViewModel = new ProductViewModel(product, resources);
-
-    assertEquals("", productViewModel.getUpcomingDeal());
-  }
-
-  @Test
-  public void upcomingDealShouldBeVisible(){
-    assertEquals(View.VISIBLE, productViewModel.getUpcomingDealVisibilityStatus());
-  }
-
-  @Test
-  public void upcomingDealShouldBeNotVisible(){
-    Product product = new ProductBuilder()
-        .withUpcomingDeal(0).build();
-
-    productViewModel = new ProductViewModel(product, resources);
-
-    assertEquals(View.GONE, productViewModel.getUpcomingDealVisibilityStatus());
   }
 
   @Test
