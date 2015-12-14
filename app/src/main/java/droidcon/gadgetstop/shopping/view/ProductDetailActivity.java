@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,11 +15,11 @@ import java.io.InputStream;
 import java.util.List;
 
 import droidcon.gadgetstop.R;
-import droidcon.gadgetstop.shopping.cart.model.ProductInCart;
 import droidcon.gadgetstop.service.APIClient;
 import droidcon.gadgetstop.service.APIClient.RequestType;
 import droidcon.gadgetstop.service.ResponseCallback;
 import droidcon.gadgetstop.service.ResponseDeserializerFactory;
+import droidcon.gadgetstop.shopping.cart.model.ProductInCart;
 import droidcon.gadgetstop.shopping.model.Product;
 import droidcon.gadgetstop.shopping.util.ImageCache;
 
@@ -41,7 +40,6 @@ public class ProductDetailActivity extends AppCompatActivity {
     renderProductDescription();
     renderProductCost();
     renderProductImage();
-    renderProductUpcomingDeal();
     renderProductPopularity();
   }
 
@@ -122,15 +120,6 @@ public class ProductDetailActivity extends AppCompatActivity {
   private void renderProductCost() {
     TextView priceTextView = (TextView) findViewById(R.id.price);
     priceTextView.setText(String.format("%s%d", getString(R.string.indian_currency), product.getPrice()));
-  }
-
-  private void renderProductUpcomingDeal() {
-    if(product.anyUpcomingDeal()){
-      final LinearLayout linearLayout = (LinearLayout) findViewById(R.id.upcoming_deal);
-      linearLayout.setVisibility(View.VISIBLE);
-      final TextView upcomingDeal = (TextView) findViewById(R.id.percentage);
-      upcomingDeal.setText(String.format("%d%s", product.getUpcomingDeal(), getString(R.string.percentage_sign)));
-    }
   }
 
   private ResponseCallback<Bitmap> bitmapCallback(final ImageView imageView) {
