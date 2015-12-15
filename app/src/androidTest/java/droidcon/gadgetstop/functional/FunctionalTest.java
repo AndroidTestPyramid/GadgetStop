@@ -1,5 +1,6 @@
 package droidcon.gadgetstop.functional;
 
+import android.content.Intent;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -32,7 +33,7 @@ import static org.hamcrest.CoreMatchers.anything;
 public class FunctionalTest {
 
   @Rule
-  public ActivityTestRule<ShoppingActivity> activityTestRule = new ActivityTestRule<>(ShoppingActivity.class);
+  public ActivityTestRule<ShoppingActivity> activityTestRule = new ActivityTestRule<>(ShoppingActivity.class, false, false);
 
   @Rule
   public MockWebServerRule mockWebServerRule = new MockWebServerRule();
@@ -49,6 +50,8 @@ public class FunctionalTest {
     mockWebServerRule.mockResponse("/sample_images/droidcon_electronics.json", APIClient.RequestType.GET.name(), electronicsResponse);
     mockWebServerRule.mockResponse("/sample_images/droidcon_accessories.json", APIClient.RequestType.GET.name(), accessoriesResponse);
     mockWebServerRule.mockResponse("/sample_images/nexus_5_case11.jpg", APIClient.RequestType.GET.name(), readInputStreamFrom("ic_launcher.png", getContext()));
+
+    activityTestRule.launchActivity(new Intent());
 
     onData(anything()).inAdapterView(withContentDescription(R.string.electronics)).atPosition(0).perform(click());
 
