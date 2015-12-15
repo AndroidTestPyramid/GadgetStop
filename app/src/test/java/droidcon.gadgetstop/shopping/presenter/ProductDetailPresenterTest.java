@@ -7,7 +7,6 @@ import org.junit.Test;
 
 import droidcon.gadgetstop.R;
 import droidcon.gadgetstop.shopping.builder.ProductBuilder;
-import droidcon.gadgetstop.shopping.cart.model.ProductInCart;
 import droidcon.gadgetstop.shopping.model.Product;
 import droidcon.gadgetstop.shopping.repository.ProductRepository;
 import droidcon.gadgetstop.shopping.view.ProductDetailView;
@@ -41,13 +40,13 @@ public class ProductDetailPresenterTest {
 
     productRepository = mock(ProductRepository.class);
 
-    productDetailsPresenter = new ProductDetailPresenter(productDetailView, product, resources, productPresenter, productRepository);
+    productDetailsPresenter = new ProductDetailPresenter(product, productRepository, resources, productDetailView);
     productDetailsPresenter.renderDetailedView();
   }
 
   @Test
   public void shouldInvokeSetDescriptionOnTheDetailsScreen(){
-    verify(productDetailView).setDescription("watch_desc");
+    verify(productDetailView).renderDescription("watch_desc");
   }
 
   @Test

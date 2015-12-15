@@ -1,7 +1,6 @@
 package droidcon.gadgetstop.shopping.presenter;
 
 import android.graphics.Bitmap;
-import android.widget.ImageView;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
@@ -17,27 +16,25 @@ import java.io.InputStream;
 import droidcon.gadgetstop.service.ResponseCallback;
 import droidcon.gadgetstop.shopping.repository.ImageRepository;
 import droidcon.gadgetstop.shopping.service.ImageFetcher;
-import droidcon.gadgetstop.shopping.view.ProductView;
+import droidcon.gadgetstop.shopping.view.ProductImageView;
 
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class ImagePresenterTest {
+public class ProductImagePresenterTest {
 
   private ImageFetcher imageFetcher;
   private Bitmap bitmap;
-  private ProductView productView;
-  private ImageView imageView;
+  private ProductImageView productImageView;
   private ImageRepository imageRepository;
 
   @Before
   public void setup(){
     imageFetcher = mock(ImageFetcher.class);
     bitmap = mock(Bitmap.class);
-    productView = mock(ProductView.class);
-    imageView = mock(ImageView.class);
+    productImageView = mock(ProductImageView.class);
     imageRepository = mock(ImageRepository.class);
   }
 
@@ -52,11 +49,11 @@ public class ImagePresenterTest {
       }
     }).when(imageFetcher).execute(eq(""), Matchers.<ResponseCallback<Bitmap>>any());
 
-    ImagePresenter productDetailsPresenter = new ImagePresenter(productView, imageFetcher, imageRepository);
-    productDetailsPresenter.fetchImageFor(imageView, "");
+    ProductImagePresenter productDetailsPresenter = new ProductImagePresenter(imageFetcher, imageRepository, productImageView);
+    productDetailsPresenter.fetchImageFor("");
 
     verify(imageRepository).save("", bitmap);
-    verify(productView).renderImage(imageView, bitmap);
+    verify(productImageView).renderImage(bitmap);
   }
 
   @Test
@@ -75,10 +72,9 @@ public class ImagePresenterTest {
       }
     }).when(imageFetcher).execute(eq(""), Matchers.<ResponseCallback<Bitmap>>any());
 
-    ImagePresenter productDetailsPresenter = new ImagePresenter(productView, imageFetcher, imageRepository);
-    productDetailsPresenter.fetchImageFor(imageView, "");
+    ProductImagePresenter productDetailsPresenter = new ProductImagePresenter(imageFetcher, imageRepository, productImageView);
+    productDetailsPresenter.fetchImageFor("");
 
-    verify(productView).renderImage(imageView, bitmap[0]);
-    verify(productView).renderImage(imageView, bitmap[0]);
+    verify(productImageView).renderImage(bitmap[0]);
   }
 }

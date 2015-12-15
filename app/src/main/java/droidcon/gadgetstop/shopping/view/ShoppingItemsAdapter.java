@@ -1,25 +1,19 @@
 package droidcon.gadgetstop.shopping.view;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import droidcon.gadgetstop.R;
-import droidcon.gadgetstop.service.APIClient;
 import droidcon.gadgetstop.shopping.model.Product;
-import droidcon.gadgetstop.shopping.presenter.ImagePresenter;
 import droidcon.gadgetstop.shopping.presenter.ProductPresenter;
-import droidcon.gadgetstop.shopping.repository.ImageRepository;
-import droidcon.gadgetstop.shopping.service.ImageFetcher;
 import droidcon.gadgetstop.shopping.viewmodel.ProductViewModel;
 
 public class ShoppingItemsAdapter extends BaseAdapter implements ProductView {
@@ -61,13 +55,12 @@ public class ShoppingItemsAdapter extends BaseAdapter implements ProductView {
     } else {
       viewHolder = (ViewHolderItem) convertView.getTag();
     }
-    final ImageFetcher imageFetcher = new ImageFetcher(new APIClient());
-    final ImageRepository imageRepository = new ImageRepository(context);
-
-    ProductPresenter productPresenter = new ProductPresenter(this, products.get(position), new ImagePresenter(this, imageFetcher, imageRepository), context.getResources());
-
+    Product product = products.get(position);
+    ProductPresenter productPresenter = new ProductPresenter(this, product, context.getResources());
     productPresenter.renderView();
-    productPresenter.renderImageFor((ImageView) convertView.findViewById(R.id.imageView));
+
+    ProductImageViewControl productImageView = new ProductImageViewControl((ImageView) convertView.findViewById(R.id.imageView));
+    productImageView.renderImage(product.getImageUrl());
 
     return convertView;
   }
@@ -88,11 +81,6 @@ public class ShoppingItemsAdapter extends BaseAdapter implements ProductView {
   @Override
   public void renderProductPrice(String price) {
     viewHolder.productPriceTextView.setText(price);
-  }
-
-  @Override
-  public void renderImage(ImageView imageView, Bitmap response) {
-    imageView.setImageBitmap(response);
   }
 
   public Product getProductAt(int position) {

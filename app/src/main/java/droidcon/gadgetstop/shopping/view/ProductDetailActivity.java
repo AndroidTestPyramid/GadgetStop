@@ -1,7 +1,6 @@
 package droidcon.gadgetstop.shopping.view;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -9,20 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import droidcon.gadgetstop.R;
-import droidcon.gadgetstop.service.APIClient;
-import droidcon.gadgetstop.shopping.cart.model.ProductInCart;
 import droidcon.gadgetstop.shopping.model.Product;
-import droidcon.gadgetstop.shopping.presenter.ImagePresenter;
 import droidcon.gadgetstop.shopping.presenter.ProductDetailPresenter;
-import droidcon.gadgetstop.shopping.presenter.ProductPresenter;
-import droidcon.gadgetstop.shopping.repository.ImageRepository;
 import droidcon.gadgetstop.shopping.repository.ProductRepository;
-import droidcon.gadgetstop.shopping.service.ImageFetcher;
 
 import static droidcon.gadgetstop.shopping.view.ProductsBaseFragment.PRODUCT_KEY;
 
@@ -30,6 +22,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
 
   private Product product;
   private ProductDetailPresenter productDetailPresenter;
+  private ProductImageViewControl productImageView;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -39,15 +32,11 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
     actionBar.setDisplayHomeAsUpEnabled(true);
     product = getIntent().getExtras().getParcelable(PRODUCT_KEY);
 
-    final ImageFetcher imageFetcher = new ImageFetcher(new APIClient());
-    final ImageRepository imageRepository = new ImageRepository(this);
-
-    final ProductPresenter productPresenter = new ProductPresenter(this, product, new ImagePresenter(this, imageFetcher, imageRepository), getResources());
-
-    productDetailPresenter = new ProductDetailPresenter(this, product, getResources(), productPresenter, new ProductRepository());
-
+    productDetailPresenter = new ProductDetailPresenter(product, new ProductRepository(), getResources(), this);
     productDetailPresenter.renderDetailedView();
-    productDetailPresenter.renderImageFor((ImageView) findViewById(R.id.product_image));
+
+    productImageView = new ProductImageViewControl((ImageView) findViewById(R.id.product_image));
+    productImageView.renderImage(product.getImageUrl());
   }
 
   public void addToCart(View view) {
@@ -85,12 +74,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
   }
 
   @Override
-  public void renderImage(ImageView imageView, Bitmap response) {
-    imageView.setImageBitmap(response);
-  }
-
-  @Override
-  public void setDescription(String description) {
+  public void renderDescription(String description) {
     final TextView descriptionTextView = (TextView) findViewById(R.id.product_description);
     descriptionTextView.setText(description);
   }
@@ -109,4 +93,5 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
       }
     }).show();
   }
+
 }

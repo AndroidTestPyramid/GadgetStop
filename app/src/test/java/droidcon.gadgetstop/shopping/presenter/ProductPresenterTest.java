@@ -17,10 +17,9 @@ import static org.mockito.Mockito.when;
 public class ProductPresenterTest {
 
   @Test
-  public void shouldRenderDataOnView(){
+  public void shouldRenderDataOnView() {
     final ProductView productView = mock(ProductView.class);
 
-    final ImagePresenter imagePresenter = mock(ImagePresenter.class);
     final Resources resources = mock(Resources.class);
     when(resources.getString(R.string.currency)).thenReturn("Rs. ");
     when(resources.getString(R.string.percentage_sign)).thenReturn("%");
@@ -30,7 +29,7 @@ public class ProductPresenterTest {
         .withTitle("watch")
         .withPrice(25).build();
 
-    final ProductPresenter productPresenter = new ProductPresenter(productView, product, imagePresenter, resources);
+    final ProductPresenter productPresenter = new ProductPresenter(productView, product, resources);
 
     productPresenter.renderView();
 

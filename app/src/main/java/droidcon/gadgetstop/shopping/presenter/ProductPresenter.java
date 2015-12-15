@@ -10,15 +10,11 @@ import droidcon.gadgetstop.shopping.viewmodel.ProductViewModel;
 public class ProductPresenter {
 
   private final ProductView productView;
-  private final Product product;
   private final ProductViewModel productViewModel;
-  private final ImagePresenter imagePresenter;
 
-  public ProductPresenter(ProductView productView, Product product, ImagePresenter imagePresenter, Resources resources) {
+  public ProductPresenter(ProductView productView, Product product, Resources resources) {
     this.productView = productView;
-    this.product = product;
     this.productViewModel = new ProductViewModel(product, resources);
-    this.imagePresenter = imagePresenter;
   }
 
   public void renderView() {
@@ -27,7 +23,4 @@ public class ProductPresenter {
     productView.renderProductPopularity(productViewModel.getPopularityLabel(), productViewModel.getPopularityLabelTextColor(), productViewModel.getPopularityLabelVisibility());
   }
 
-  public void renderImageFor(ImageView imageView) {
-    imagePresenter.fetchImageFor(imageView, product.getImageUrl());
-  }
 }

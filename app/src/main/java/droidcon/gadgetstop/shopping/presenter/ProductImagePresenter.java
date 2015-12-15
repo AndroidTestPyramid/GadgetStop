@@ -1,7 +1,6 @@
 package droidcon.gadgetstop.shopping.presenter;
 
 import android.graphics.Bitmap;
-import android.widget.ImageView;
 
 import java.io.InputStream;
 
@@ -9,28 +8,29 @@ import droidcon.gadgetstop.service.ResponseCallback;
 import droidcon.gadgetstop.service.ResponseDeserializerFactory;
 import droidcon.gadgetstop.shopping.repository.ImageRepository;
 import droidcon.gadgetstop.shopping.service.ImageFetcher;
-import droidcon.gadgetstop.shopping.view.ProductView;
+import droidcon.gadgetstop.shopping.view.ProductImageView;
+import droidcon.gadgetstop.shopping.view.ProductImageViewControl;
 
-public class ImagePresenter {
-  private final ProductView productView;
+public class ProductImagePresenter {
   private final ImageFetcher imageFetcher;
   private ImageRepository imageRepository;
+  private ProductImageView productImageView;
 
-  public ImagePresenter(ProductView productView, ImageFetcher imageFetcher, ImageRepository imageRepository) {
-    this.productView = productView;
+  public ProductImagePresenter(ImageFetcher imageFetcher, ImageRepository imageRepository, ProductImageView productImageView) {
     this.imageFetcher = imageFetcher;
     this.imageRepository = imageRepository;
+    this.productImageView = productImageView;
   }
 
-  public void fetchImageFor(ImageView imageView, String imageUrl) {
+  public void fetchImageFor(String imageUrl) {
     Bitmap image = imageRepository.getImageFor(imageUrl);
     if (image != null)
-      productView.renderImage(imageView, image);
+      productImageView.renderImage(image);
     else
-      imageFetcher.execute(imageUrl, bitmapCallback(imageView, imageUrl));
+      imageFetcher.execute(imageUrl, bitmapCallback(imageUrl));
   }
 
-  private ResponseCallback<Bitmap> bitmapCallback(final ImageView imageView, final String imageUrl) {
+  private ResponseCallback<Bitmap> bitmapCallback(final String imageUrl) {
     return new ResponseCallback<Bitmap>() {
       @Override
       public Bitmap deserialize(InputStream response) {
@@ -40,7 +40,7 @@ public class ImagePresenter {
       @Override
       public void onSuccess(Bitmap response) {
         imageRepository.save(imageUrl, response);
-        productView.renderImage(imageView, response);
+        productImageView.renderImage(response);
       }
 
       @Override

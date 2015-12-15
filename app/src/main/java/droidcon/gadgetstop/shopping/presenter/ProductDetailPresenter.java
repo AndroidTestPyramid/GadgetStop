@@ -1,7 +1,6 @@
 package droidcon.gadgetstop.shopping.presenter;
 
 import android.content.res.Resources;
-import android.widget.ImageView;
 
 import droidcon.gadgetstop.R;
 import droidcon.gadgetstop.shopping.model.Product;
@@ -13,21 +12,21 @@ public class ProductDetailPresenter {
 
   private final ProductDetailView productDetailView;
   private final Resources resources;
-  private final ProductPresenter productPresenter;
   private ProductRepository productRepository;
   private final ProductViewModel productViewModel;
 
-  public ProductDetailPresenter(ProductDetailView productDetailView, Product product, Resources resources, ProductPresenter productPresenter, ProductRepository productRepository) {
+  public ProductDetailPresenter(Product product, ProductRepository productRepository, Resources resources, ProductDetailView productDetailView) {
     this.productDetailView = productDetailView;
     this.resources = resources;
-    this.productPresenter = productPresenter;
     this.productRepository = productRepository;
     productViewModel = new ProductViewModel(product, resources);
   }
 
   public void renderDetailedView() {
-    productPresenter.renderView();
-    productDetailView.setDescription(productViewModel.getDescription());
+    productDetailView.renderProductTitle(productViewModel.getTitle());
+    productDetailView.renderProductPrice(productViewModel.getPrice());
+    productDetailView.renderProductPopularity(productViewModel.getPopularityLabel(), productViewModel.getPopularityLabelTextColor(), productViewModel.getPopularityLabelVisibility());
+    productDetailView.renderDescription(productViewModel.getDescription());
   }
 
   public void saveProduct(Product product) {
@@ -37,9 +36,5 @@ public class ProductDetailPresenter {
       productRepository.save(product);
       productDetailView.showToastWithMessage(resources.getString(R.string.addedToCart));
     }
-  }
-
-  public void renderImageFor(ImageView imageView) {
-    productPresenter.renderImageFor(imageView);
   }
 }
