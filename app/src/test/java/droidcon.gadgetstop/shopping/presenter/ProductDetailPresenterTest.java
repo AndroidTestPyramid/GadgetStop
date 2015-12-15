@@ -64,6 +64,6 @@ public class ProductDetailPresenterTest {
     productDetailsPresenter.saveProduct(product);
 
     verify(productRepository, never()).save(product);
-    verify(productDetailView).showToastWithMessage("Item already added to cart");
+    verify(productDetailView).showDialogWithMessage("Item already added to cart");
   }
 }
