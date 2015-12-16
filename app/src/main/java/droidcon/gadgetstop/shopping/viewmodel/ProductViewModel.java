@@ -20,7 +20,7 @@ public class ProductViewModel  {
   }
 
   public String getPrice() {
-    return String.format("%s%d", resources.getString(R.string.currency), product.getPrice());
+    return String.format("%s%d", resources.getString(R.string.indian_currency), product.getPrice());
   }
 
 

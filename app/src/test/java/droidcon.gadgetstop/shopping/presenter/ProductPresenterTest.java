@@ -21,7 +21,7 @@ public class ProductPresenterTest {
     final ProductView productView = mock(ProductView.class);
 
     final Resources resources = mock(Resources.class);
-    when(resources.getString(R.string.currency)).thenReturn("Rs. ");
+    when(resources.getString(R.string.indian_currency)).thenReturn("Rs. ");
     when(resources.getString(R.string.percentage_sign)).thenReturn("%");
     when(resources.getString(R.string.empty_string)).thenReturn("");
 

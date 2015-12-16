@@ -30,7 +30,7 @@ public class ProductDetailPresenterTest {
         .withDescription("watch_desc").build();
 
     final Resources resources = mock(Resources.class);
-    when(resources.getString(R.string.currency)).thenReturn("Rs. ");
+    when(resources.getString(R.string.indian_currency)).thenReturn("Rs. ");
     when(resources.getString(R.string.percentage_sign)).thenReturn("%");
     when(resources.getString(R.string.addedToCart)).thenReturn("Item saved to cart");
     when(resources.getString(R.string.already_added_to_cart)).thenReturn("Item already added to cart");
