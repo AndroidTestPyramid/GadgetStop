@@ -39,48 +39,6 @@ public class ProductViewModelTest {
   }
 
   @Test
-  public void newLabelShouldBeVisibleAsProductIsNew(){
-    Product product = new ProductBuilder()
-        .withIsNew().build();
-
-    productViewModel = new ProductViewModel(product, resources);
-
-    assertEquals("New", productViewModel.getPopularityLabel());
-  }
-
-  @Test
-  public void popularLabelShouldBeVisibleAsProductIsPopularAndNew(){
-    Product product = new ProductBuilder()
-        .withIsPopular()
-        .withIsNew().build();
-
-    productViewModel = new ProductViewModel(product, resources);
-
-    assertEquals("Popular", productViewModel.getPopularityLabel());
-  }
-
-  @Test
-  public void popularLabelShouldBeVisibleAsProductIsPopular(){
-    Product product = new ProductBuilder()
-        .withIsPopular().build();
-
-    productViewModel = new ProductViewModel(product,resources);
-
-    assertEquals("Popular", productViewModel.getPopularityLabel());
-  }
-
-  @Test
-  public void popularityViewShouldBeVisible(){
-    Product product = new ProductBuilder()
-        .withIsPopular()
-        .withIsNew().build();
-
-    productViewModel = new ProductViewModel(product, resources);
-
-    assertEquals(View.VISIBLE, productViewModel.getPopularityLabelVisibility());
-  }
-
-  @Test
   public void popularityViewShouldBeVisibleAsProductIsNew(){
     Product product = new ProductBuilder()
         .withIsNew().build();
@@ -101,7 +59,49 @@ public class ProductViewModelTest {
   }
 
   @Test
-  public void popularityLabelShouldBeGreenAsProductIsNew(){
+  public void popularityViewShouldBeVisibleAsProductIsNewAndPopular(){
+    Product product = new ProductBuilder()
+        .withIsPopular()
+        .withIsNew().build();
+
+    productViewModel = new ProductViewModel(product, resources);
+
+    assertEquals(View.VISIBLE, productViewModel.getPopularityLabelVisibility());
+  }
+
+  @Test
+  public void popularityLabelShouldBeNewAsProductIsNew(){
+    Product product = new ProductBuilder()
+        .withIsNew().build();
+
+    productViewModel = new ProductViewModel(product, resources);
+
+    assertEquals("New", productViewModel.getPopularityLabel());
+  }
+
+  @Test
+  public void popularityLabelShouldBePopularAsProductIsPopular(){
+    Product product = new ProductBuilder()
+        .withIsPopular().build();
+
+    productViewModel = new ProductViewModel(product,resources);
+
+    assertEquals("Popular", productViewModel.getPopularityLabel());
+  }
+
+  @Test
+  public void popularityLabelShouldBePopularAsProductIsPopularAndNew(){
+    Product product = new ProductBuilder()
+        .withIsPopular()
+        .withIsNew().build();
+
+    productViewModel = new ProductViewModel(product, resources);
+
+    assertEquals("Popular", productViewModel.getPopularityLabel());
+  }
+
+  @Test
+  public void popularityLabelShouldBeRedAsProductIsNew(){
     Product product = new ProductBuilder()
         .withIsNew().build();
 
@@ -111,10 +111,9 @@ public class ProductViewModelTest {
   }
 
   @Test
-  public void popularityLabelShouldBePurpleAsProductIsPopularAndNew(){
+  public void popularityLabelShouldBePurpleAsProductIsPopular(){
     Product product = new ProductBuilder()
-        .withIsPopular()
-        .withIsNew().build();
+        .withIsPopular().build();
 
     productViewModel = new ProductViewModel(product, resources);
 
@@ -122,9 +121,10 @@ public class ProductViewModelTest {
   }
 
   @Test
-  public void popularityLabelShouldBePurpleAsProductIsPopular(){
+  public void popularityLabelShouldBePurpleAsProductIsPopularAndNew(){
     Product product = new ProductBuilder()
-        .withIsPopular().build();
+        .withIsPopular()
+        .withIsNew().build();
 
     productViewModel = new ProductViewModel(product, resources);
 
