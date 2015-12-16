@@ -58,7 +58,7 @@ public class ProductDetailPresenterTest {
   }
 
   @Test
-  public void shouldShowToastMessageWhenProductIsAlreadyAddedToCart(){
+  public void shouldShowDialogMessageWhenProductIsAlreadyAddedToCart(){
     when(productRepository.hasProduct(product)).thenReturn(true);
     productDetailsPresenter.saveProduct(product);
 
