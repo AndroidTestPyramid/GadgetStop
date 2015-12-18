@@ -29,7 +29,7 @@ public class ProductDetailPresenter {
     productDetailView.renderDescription(productViewModel.getDescription());
   }
 
-  public void saveProduct(Product product) {
+  public void addToCart(Product product) {
     if (productRepository.hasProduct(product)) {
       productDetailView.showDialogWithMessage(resources.getString(R.string.already_added_to_cart));
     } else {

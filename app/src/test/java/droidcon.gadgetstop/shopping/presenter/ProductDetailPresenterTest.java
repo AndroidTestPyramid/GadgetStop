@@ -51,7 +51,7 @@ public class ProductDetailPresenterTest {
 
   @Test
   public void shouldShowToastMessageOnSavingProductToDB(){
-    productDetailsPresenter.saveProduct(product);
+    productDetailsPresenter.addToCart(product);
 
     verify(productRepository).save(product);
     verify(productDetailView).showToastWithMessage("Item saved to cart");
@@ -60,7 +60,7 @@ public class ProductDetailPresenterTest {
   @Test
   public void shouldShowDialogMessageWhenProductIsAlreadyAddedToCart(){
     when(productRepository.hasProduct(product)).thenReturn(true);
-    productDetailsPresenter.saveProduct(product);
+    productDetailsPresenter.addToCart(product);
 
     verify(productRepository, never()).save(product);
     verify(productDetailView).showDialogWithMessage("Item already added to cart");

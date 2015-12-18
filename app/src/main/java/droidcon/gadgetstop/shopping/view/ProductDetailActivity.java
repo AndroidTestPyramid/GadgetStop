@@ -2,7 +2,6 @@ package droidcon.gadgetstop.shopping.view;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -40,7 +39,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
   }
 
   public void addToCart(View view) {
-    productDetailPresenter.saveProduct(product);
+    productDetailPresenter.addToCart(product);
   }
 
   @Override

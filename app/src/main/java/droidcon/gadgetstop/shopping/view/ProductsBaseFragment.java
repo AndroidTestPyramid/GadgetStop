@@ -51,7 +51,6 @@ public abstract class ProductsBaseFragment extends Fragment implements ProductLi
     final ShoppingItemsAdapter shoppingItemsAdapter = new ShoppingItemsAdapter(productViewModels, products, getActivity());
     gridView.setAdapter(shoppingItemsAdapter);
 
-    //TODO: Even if I pass productViewModels, getItem will give productViewModel only...cannot avoid passing view model
     gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
       @Override
       public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -68,7 +67,6 @@ public abstract class ProductsBaseFragment extends Fragment implements ProductLi
     progressDialog.dismiss();
   }
 
-  //TODO: finish activity unit test means we have to talk to presenter again.
   @Override
   public void showErrorDialog(String message) {
     new AlertDialog.Builder(getActivity()).setMessage(message).setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
