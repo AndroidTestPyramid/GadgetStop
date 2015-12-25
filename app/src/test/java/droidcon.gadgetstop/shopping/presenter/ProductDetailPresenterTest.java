@@ -36,7 +36,6 @@ public class ProductDetailPresenterTest {
     when(resources.getString(R.string.already_added_to_cart)).thenReturn("Item already added to cart");
 
     productDetailView = mock(ProductDetailView.class);
-    final ProductPresenter productPresenter = mock(ProductPresenter.class);
 
     productRepository = mock(ProductRepository.class);
 

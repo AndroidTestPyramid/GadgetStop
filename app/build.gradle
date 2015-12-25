@@ -32,6 +32,8 @@ jacoco {
 def coverageSourceDirs = [
         'src/main/java'
 ]
+
+// Can merge both
 task generateJacocoTestReports(type:JacocoReport, dependsOn: "test") {
     group = "Reporting"
     description = "Generate unit test coverage reports"
@@ -46,6 +48,24 @@ task generateJacocoTestReports(type:JacocoReport, dependsOn: "test") {
     sourceDirectories = files(coverageSourceDirs)
     additionalSourceDirs = files(coverageSourceDirs)
     executionData = files('build/jacoco/testDebugUnitTest.exec')
+}
+
+task generateIntegrationJacocoTestReports(type:JacocoReport, dependsOn: "connectedAndroidTest") {
+    group = "Reporting"
+    description = "Generate test coverage reports"
+    classDirectories = fileTree(
+            dir: 'build/intermediates/classes/debug',
+            excludes: ['**/R.class',
+                       '**/R$*.class',
+                       '**/*$ViewInjector*.*',
+                       '**/BuildConfig.*',
+                       '**/Manifest*.*',
+                       '**/*Activity*.*',
+                       '**/*Fragment*.*']
+    )
+    sourceDirectories = files(coverageSourceDirs)
+    additionalSourceDirs = files(coverageSourceDirs)
+    executionData = files('build/outputs/code-coverage/connected/coverage.ec')
 }
 
 
